@@ -1,0 +1,7 @@
+# .gitignore content
+/target/
+/.idea/
+/*.iml
+/out/
+*.class
+*.log
