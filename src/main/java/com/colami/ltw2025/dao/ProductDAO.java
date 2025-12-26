@@ -20,10 +20,11 @@ public class ProductDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    // 1. Lấy tất cả sản phẩm (Dùng cho trang Shop)
+    // 1. Lấy tất cả sản phẩm (Sắp xếp mới nhất lên đầu để Admin dễ nhìn)
     public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
-        String query = "SELECT * FROM Product";
+        // Sắp xếp giảm dần theo ID
+        String query = "SELECT * FROM Product ORDER BY id DESC";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -36,7 +37,7 @@ public class ProductDAO {
                         rs.getDouble(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getInt(7)
+                        rs.getInt(7) // Đảm bảo constructor này khớp với Product Entity
                 ));
             }
         } catch (Exception e) {
@@ -45,7 +46,7 @@ public class ProductDAO {
         return list;
     }
 
-    // 2. Lấy sản phẩm theo mã danh mục (Dùng để lọc Laptop/Điện thoại)
+    // 2. Lấy sản phẩm theo mã danh mục
     public List<Product> getProductByCID(String cid) {
         List<Product> list = new ArrayList<>();
         String query = "SELECT * FROM Product WHERE cateID = ?";
@@ -71,7 +72,7 @@ public class ProductDAO {
         return list;
     }
 
-    // 3. Lấy chi tiết một sản phẩm theo ID (Dùng cho trang Detail)
+    // 3. Lấy chi tiết sản phẩm theo ID
     public Product getProductByID(String id) {
         String query = "SELECT * FROM Product WHERE id = ?";
         try {
@@ -96,7 +97,7 @@ public class ProductDAO {
         return null;
     }
 
-    // 4. Tìm kiếm sản phẩm theo tên (Dùng cho ô Search)
+    // 4. Tìm kiếm sản phẩm
     public List<Product> searchByName(String txtSearch) {
         List<Product> list = new ArrayList<>();
         String query = "SELECT * FROM Product WHERE [name] LIKE ?";
@@ -122,39 +123,15 @@ public class ProductDAO {
         return list;
     }
 
-
-    public static void main(String[] args) {
-        ProductDAO dao = new ProductDAO();
-
-        // Test 1: Lấy tất cả sản phẩm
-        List<Product> list = dao.getAllProduct();
-        System.out.println("--- DANH SÁCH TẤT CẢ SẢN PHẨM ---");
-        for (Product o : list) {
-            System.out.println(o);
-        }
-
-        // Test 2: Lấy sản phẩm theo ID (Ví dụ ID = 1)
-        System.out.println("\n--- CHI TIẾT SẢN PHẨM ID = 1 ---");
-        Product p = dao.getProductByID("1");
-        if (p != null) {
-            System.out.println(p.getName() + " - Giá: " + p.getPrice());
-        } else {
-            System.out.println("Không tìm thấy sản phẩm!");
-        }
-    }
-
-
-
+    // 5. Đặt hàng (Transaction)
     public void insertOrder(Account acc, List<Item> cart, String name, String address, String phone, double totalMoney) {
         LocalDate curDate = LocalDate.now();
-        String date = curDate.toString(); // Định dạng YYYY-MM-DD
-
+        String date = curDate.toString();
         try {
             conn = new DBContext().getConnection();
 
-            // 1. Chèn vào bảng Orders
+            // Insert Orders
             String query = "INSERT INTO [dbo].[Orders] ([accountID], [totalPrice], [date], [name], [address], [phone]) VALUES (?,?,?,?,?,?)";
-            // Statement.RETURN_GENERATED_KEYS dùng để lấy ID vừa tự tăng trong SQL
             ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, acc.getuID());
             ps.setDouble(2, totalMoney);
@@ -164,14 +141,13 @@ public class ProductDAO {
             ps.setNString(6, phone);
             ps.executeUpdate();
 
-            // Lấy ID của Order vừa tạo
             rs = ps.getGeneratedKeys();
             int oid = 0;
             if (rs.next()) {
                 oid = rs.getInt(1);
             }
 
-            // 2. Chèn danh sách sản phẩm vào OrderDetail
+            // Insert OrderDetail
             String query2 = "INSERT INTO [dbo].[OrderDetail] ([orderID], [productID], [quantity], [price]) VALUES (?,?,?,?)";
             ps = conn.prepareStatement(query2);
             for (Item i : cart) {
@@ -184,14 +160,14 @@ public class ProductDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            // Luôn đóng kết nối sau khi dùng
             try { if(conn != null) conn.close(); } catch (Exception e) {}
         }
     }
 
+    // 6. Lấy danh sách đơn hàng (Admin)
     public List<Order> getAllOrders() {
         List<Order> list = new ArrayList<>();
-        String query = "SELECT * FROM Orders"; // Đảm bảo bảng này có dữ liệu trước
+        String query = "SELECT * FROM Orders ORDER BY id DESC";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -205,5 +181,66 @@ public class ProductDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    // --- CÁC HÀM MỚI DÀNH CHO ADMIN MANAGER ---
+
+    // 7. Xóa sản phẩm theo ID
+    public void deleteProduct(String pid) {
+        String query = "DELETE FROM Product WHERE id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, pid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 8. Thêm sản phẩm mới
+    public void insertProduct(String name, String image, String price, String title, String description, String category) {
+        String query = "INSERT INTO [dbo].[Product] \n" +
+                "([name],[image],[price],[title],[description],[cateID])\n" +
+                "VALUES(?,?,?,?,?,?)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, image);
+            ps.setString(3, price);
+            ps.setString(4, title);
+            ps.setString(5, description);
+            ps.setString(6, category);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 9. Chỉnh sửa sản phẩm
+    public void updateProduct(String id, String name, String image, String price, String title, String description, String category) {
+        String query = "UPDATE [dbo].[Product]\n" +
+                "SET [name] = ?,\n" +
+                "[image] = ?,\n" +
+                "[price] = ?,\n" +
+                "[title] = ?,\n" +
+                "[description] = ?,\n" +
+                "[cateID] = ?\n" +
+                "WHERE [id] = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, image);
+            ps.setString(3, price);
+            ps.setString(4, title);
+            ps.setString(5, description);
+            ps.setString(6, category);
+            ps.setString(7, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

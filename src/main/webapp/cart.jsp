@@ -26,8 +26,9 @@
             </div>
             <div class="col-sm-6">
                 <div class="shopping-item">
+                    <%-- SỬA 1: Tổng tiền trên góc phải --%>
                     <a href="cart.jsp">Cart - <span class="cart-amunt">
-                            <fmt:formatNumber value="${sessionScope.totalMoney}" type="number"/> đ
+                            <fmt:formatNumber value="${sessionScope.totalMoney}" type="number" maxFractionDigits="0"/> đ
                         </span> <i class="fa fa-shopping-cart"></i>
                         <span class="product-count">${sessionScope.cart != null ? sessionScope.cart.size() : 0}</span></a>
                 </div>
@@ -79,7 +80,6 @@
                             <c:forEach items="${sessionScope.cart}" var="item">
                                 <tr class="cart_item">
                                     <td class="product-remove">
-                                            <%-- Sửa link xóa: gọi action=delete --%>
                                         <a title="Remove this item" class="remove" href="cart-process?action=delete&id=${item.product.id}">×</a>
                                     </td>
                                     <td class="product-thumbnail">
@@ -89,26 +89,25 @@
                                         <a href="detail?pid=${item.product.id}">${item.product.name}</a>
                                     </td>
                                     <td class="product-price">
-                                        <span class="amount"><fmt:formatNumber value="${item.price}" type="number"/> đ</span>
+                                            <%-- SỬA 2: Giá từng sản phẩm --%>
+                                        <span class="amount"><fmt:formatNumber value="${item.price}" type="number" maxFractionDigits="0"/> đ</span>
                                     </td>
                                     <td class="product-quantity">
                                         <div class="quantity buttons_added">
-                                                <%-- Nút trừ: gọi action=update và num-1 --%>
                                             <a href="cart-process?action=update&id=${item.product.id}&num=${item.quantity - 1}" class="minus" style="padding: 5px 10px; background: #eee; text-decoration: none; color: #000;">-</a>
                                             <input type="number" size="4" class="input-text qty text" value="${item.quantity}" readonly>
-                                                <%-- Nút cộng: gọi action=update và num+1 --%>
                                             <a href="cart-process?action=update&id=${item.product.id}&num=${item.quantity + 1}" class="plus" style="padding: 5px 10px; background: #eee; text-decoration: none; color: #000;">+</a>
                                         </div>
                                     </td>
                                     <td class="product-subtotal">
-                                        <span class="amount"><fmt:formatNumber value="${item.price * item.quantity}" type="number"/> đ</span>
+                                            <%-- SỬA 3: Tổng tiền con (Subtotal) --%>
+                                        <span class="amount"><fmt:formatNumber value="${item.price * item.quantity}" type="number" maxFractionDigits="0"/> đ</span>
                                     </td>
                                 </tr>
                             </c:forEach>
                             <tr>
                                 <td class="actions" colspan="6">
                                     <div class="coupon">
-                                        <%-- Form áp dụng voucher --%>
                                         <form action="apply-voucher" method="post" style="display: inline-block;">
                                             <input type="text" placeholder="Coupon code (COLAMI)" id="coupon_code" class="input-text" name="coupon_code">
                                             <input type="submit" value="Apply" class="button">
@@ -129,7 +128,10 @@
                                     <tbody>
                                     <tr class="order-total">
                                         <th>Order total</th>
-                                        <td><strong><span class="amount"><fmt:formatNumber value="${sessionScope.totalMoney}" type="number"/> đ</span></strong> </td>
+                                        <td><strong><span class="amount">
+                                            <%-- SỬA 4: Tổng tiền cuối cùng --%>
+                                            <fmt:formatNumber value="${sessionScope.totalMoney}" type="number" maxFractionDigits="0"/> đ
+                                        </span></strong> </td>
                                     </tr>
                                     </tbody>
                                 </table>

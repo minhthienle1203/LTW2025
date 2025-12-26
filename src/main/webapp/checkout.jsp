@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +64,7 @@
                         </c:if>
 
                         <%-- FORM CHÍNH --%>
-                            <form action="${pageContext.request.contextPath}/place-order" method="post" class="checkout">
+                            <form action="place-order" method="post">
                             <div id="customer_details" class="col2-set">
                                 <div class="col-1">
                                     <div class="woocommerce-billing-fields">

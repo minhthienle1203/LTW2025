@@ -58,7 +58,8 @@ public class OrderControl extends HttpServlet {
         session.removeAttribute("cart");
         session.setAttribute("totalMoney", 0);
 
-        request.setAttribute("msg", "Đặt hàng thành công! Cảm ơn bợn đã ủng hộ Colami.");
-        request.getRequestDispatcher("home").forward(request, response);
+
+        session.setAttribute("msg", "Đặt hàng thành công! Cảm ơn bợn đã ủng hộ Colami.");
+        response.sendRedirect("home");
     }
 }
