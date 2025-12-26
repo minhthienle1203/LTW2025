@@ -17,15 +17,15 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -45,14 +45,14 @@
                 <div class="col-sm-6">
                     <div class="logo">
                        
-                            <a href="./"><img src="img/logo.png"></a>
+                            <a href="assets"><img src="assets/img/logo.png"></a>
                        
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="../cart.jsp">Cart <span class="cart-amunt"></span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                        <a href="cart.jsp">Cart <span class="cart-amunt"></span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                     </div>
                 </div>
             </div>
@@ -73,14 +73,14 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="../shop.jsp">Shop page</a></li>
+                        <li><a href="assets/index.html">Home</a></li>
+                        <li><a href="shop.jsp">Shop page</a></li>
 
-                        <li><a href="../cart.jsp">Cart</a></li>
-                        <li><a href="../checkout.jsp">Check out</a></li>
+                        <li><a href="cart.jsp">Cart</a></li>
+                        <li><a href="checkout.jsp">Check out</a></li>
 
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="../login.jsp">Log in</a></li>
+                        <li><a href="assets/contact.html">Contact</a></li>
+                        <li><a href="login.jsp">Log in</a></li>
                     </ul>
                 </div>
             </div>
@@ -117,35 +117,35 @@
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Products</h2>
                         <div class="thubmnail-recent">
-                            <img src="img/xiaomi.jpg" class="recent-thumb" alt="">
+                            <img src="assets/img/xiaomi.jpg" class="recent-thumb" alt="">
                             <h2><a href="single-product.html">Xiaomi 11T 5G 128GB</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>10.390.000</ins> <del>10.990.000</del>
                             </div>
                         </div>
                         <div class="thubmnail-recent">
-                            <img src="img/ss.jpg" class="recent-thumb" alt="">
+                            <img src="assets/img/ss.jpg" class="recent-thumb" alt="">
                             <h2><a href="single-product.html"> Samsung Galaxy A52s 5G</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>10.690.000</ins> <del>10.990.000</del>
                             </div>
                         </div>
                         <div class="thubmnail-recent">
-                            <img src="img/applle.jpg" class="recent-thumb" alt="">
+                            <img src="assets/img/applle.jpg" class="recent-thumb" alt="">
                             <h2><a href="single-product.html">Apple Watch SE 40mm</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>8.450.000</ins> <del>8.990.000</del>
                             </div>
                         </div>
                         <div class="thubmnail-recent">
-                            <img src="img/sdp.jpg" class="recent-thumb" alt="">
+                            <img src="assets/img/sdp.jpg" class="recent-thumb" alt="">
                             <h2><a href="single-product.html">Xmobile P68D </a></h2>
                             <div class="product-sidebar-price">
                                 <ins>490.000</ins> <del>700.000</del>
                             </div>
                         </div>
                         <div class="thubmnail-recent">
-                            <img src="img/tab.jpg" class="recent-thumb" alt="">
+                            <img src="assets/img/tab.jpg" class="recent-thumb" alt="">
                             <h2><a href="single-product.html">Samsung Galaxy Tab S7 FE</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>11.990.000</ins> <del>12.990.000</del>
@@ -170,13 +170,13 @@
                             <div class="col-sm-6">
                                 <div class="product-images">
                                     <div class="product-main-img">
-                                        <img src="img/laptop.jpg" alt="">
+                                        <img src="assets/img/laptop.jpg" alt="">
                                     </div>
 
                                     <div class="product-gallery">
-                                        <img src="img/acer-nitro-gaming-an515-57-727j-i7-nhqd9sv005-1-org.jpg" alt="">
-                                        <img src="img/acer-nitro-gaming-an515-57-727j-i7-nhqd9sv005-5-org.jpg" alt="">
-                                        <img src="img/acer-nitro-gaming-an515-57-727j-i7-nhqd9sv005-6-org.jpg" alt="">
+                                        <img src="assets/img/acer-nitro-gaming-an515-57-727j-i7-nhqd9sv005-1-org.jpg" alt="">
+                                        <img src="assets/img/acer-nitro-gaming-an515-57-727j-i7-nhqd9sv005-5-org.jpg" alt="">
+                                        <img src="assets/img/acer-nitro-gaming-an515-57-727j-i7-nhqd9sv005-6-org.jpg" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +242,7 @@
                             <div class="related-products-carousel">
                                 <div class="single-product">
                                     <div class="product-f-image">
-                                        <img src="img/product-1.jpg" alt="">
+                                        <img src="assets/img/product-1.jpg" alt="">
                                         <div class="product-hover">
                                             <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                             <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
@@ -257,7 +257,7 @@
                                 </div>
                                 <div class="single-product">
                                     <div class="product-f-image">
-                                        <img src="img/product-2.jpg" alt="">
+                                        <img src="assets/img/product-2.jpg" alt="">
                                         <div class="product-hover">
                                             <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                             <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
@@ -271,7 +271,7 @@
                                 </div>
                                 <div class="single-product">
                                     <div class="product-f-image">
-                                        <img src="img/product-3.jpg" alt="">
+                                        <img src="assets/img/product-3.jpg" alt="">
                                         <div class="product-hover">
                                             <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                             <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
@@ -286,7 +286,7 @@
                                 </div>
                                 <div class="single-product">
                                     <div class="product-f-image">
-                                        <img src="img/product-4.jpg" alt="">
+                                        <img src="assets/img/product-4.jpg" alt="">
                                         <div class="product-hover">
                                             <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                             <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
@@ -301,7 +301,7 @@
                                 </div>
                                 <div class="single-product">
                                     <div class="product-f-image">
-                                        <img src="img/product-5.jpg" alt="">
+                                        <img src="assets/img/product-5.jpg" alt="">
                                         <div class="product-hover">
                                             <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                             <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
@@ -316,7 +316,7 @@
                                 </div>
                                 <div class="single-product">
                                     <div class="product-f-image">
-                                        <img src="img/product-6.jpg" alt="">
+                                        <img src="assets/img/product-6.jpg" alt="">
                                         <div class="product-hover">
                                             <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                             <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
@@ -401,14 +401,14 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <!-- jQuery sticky menu -->
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/jquery.sticky.js"></script>
 
     <!-- jQuery easing -->
-    <script src="js/jquery.easing.1.3.min.js"></script>
+    <script src="assets/js/jquery.easing.1.3.min.js"></script>
 
     <!-- Main Script -->
-    <script src="js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
