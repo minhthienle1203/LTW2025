@@ -35,7 +35,7 @@
         <div class="row">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="home">Home</a></li>
                     <li><a href="shop.jsp">Shop page</a></li>
                     <li class="active"><a href="login">Log in</a></li>
                 </ul>

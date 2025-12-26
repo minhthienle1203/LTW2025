@@ -1,332 +1,144 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
-<!--
-	ustora by freshdesignweb.com
-	Twitter: https://twitter.com/freshdesignweb
-	URL: https://www.freshdesignweb.com/ustora/
--->
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Colami shop</title>
-    <!-- Google Fonts -->
+    <title>Colami shop - ${detail.name}</title>
+
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
 
-    <!-- Bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/owl.carousel.css">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
-
 <body>
 
-
-
-    <div class="site-branding-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="logo">
-                       
-                            <a href="assets"><img src="assets/img/logo.png"></a>
-                       
-                    </div>
+<div class="site-branding-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="logo">
+                    <h1><a href="home">Colami <span>shop</span></a></h1>
                 </div>
+            </div>
 
-                <div class="col-sm-6">
-                    <div class="shopping-item">
-                        <a href="cart.jsp">Cart <span class="cart-amunt"></span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
-                    </div>
+            <div class="col-sm-6">
+                <div class="shopping-item">
+                    <a href="cart">Cart - <span class="cart-amunt">
+                            <fmt:formatNumber value="${totalMoney}" type="number"/> đ
+                        </span> <i class="fa fa-shopping-cart"></i>
+                        <span class="product-count">${sessionScope.cart != null ? sessionScope.cart.size() : 0}</span></a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End site branding area -->
+</div>
 
-    <div class="mainmenu-area">
-        <div class="container">
-            <div class="row">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="assets/index.html">Home</a></li>
-                        <li><a href="shop.jsp">Shop page</a></li>
+<div class="mainmenu-area">
+    <div class="container">
+        <div class="row">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="home">Home</a></li>
+                    <li class="active"><a href="shop">Shop page</a></li>
+                    <li><a href="cart">Cart</a></li>
+                    <li><a href="checkout.jsp">Check out</a></li>
+                    <li><a href="contact.jsp">Contact</a></li>
+                    <c:if test="${sessionScope.acc == null}">
+                        <li><a href="login">Log in</a></li>
+                    </c:if>
+                    <c:if test="${sessionScope.acc != null}">
+                        <li><a href="#">Hello: ${sessionScope.acc.user}</a></li>
+                        <li><a href="logout">Logout</a></li>
+                    </c:if>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-                        <li><a href="cart.jsp">Cart</a></li>
-                        <li><a href="checkout.jsp">Check out</a></li>
-
-                        <li><a href="assets/contact.html">Contact</a></li>
-                        <li><a href="login.jsp">Log in</a></li>
-                    </ul>
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>Chi tiết sản phẩm</h2>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End mainmenu area -->
+</div>
 
-    <div class="product-big-title-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="product-bit-title text-center">
-                        <h2>Shop</h2>
-                    </div>
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="single-sidebar">
+                    <h2 class="sidebar-title">Tìm kiếm</h2>
+                    <form action="search" method="get">
+                        <input type="text" name="txt" placeholder="Nhập tên sản phẩm...">
+                        <input type="submit" value="Tìm">
+                    </form>
+                </div>
+
+                <div class="single-sidebar">
+                    <h2 class="sidebar-title">Sản phẩm mới</h2>
+                    <c:forEach items="${listP}" var="p" end="4">
+                        <div class="thubmnail-recent">
+                            <img src="${p.image}" class="recent-thumb" alt="">
+                            <h2><a href="detail?pid=${p.id}">${p.name}</a></h2>
+                            <div class="product-sidebar-price">
+                                <ins><fmt:formatNumber value="${p.price}" type="number"/> đ</ins>
+                            </div>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
-        </div>
-    </div>
 
-
-    <div class="single-product-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Search Products</h2>
-                        <form action="">
-                            <input type="text" placeholder="Search products...">
-                            <input type="submit" value="Search">
-                        </form>
-                    </div>
-
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Products</h2>
-                        <div class="thubmnail-recent">
-                            <img src="assets/img/xiaomi.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.html">Xiaomi 11T 5G 128GB</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>10.390.000</ins> <del>10.990.000</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="assets/img/ss.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.html"> Samsung Galaxy A52s 5G</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>10.690.000</ins> <del>10.990.000</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="assets/img/applle.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.html">Apple Watch SE 40mm</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>8.450.000</ins> <del>8.990.000</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="assets/img/sdp.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.html">Xmobile P68D </a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>490.000</ins> <del>700.000</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="assets/img/tab.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.html">Samsung Galaxy Tab S7 FE</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>11.990.000</ins> <del>12.990.000</del>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Recent Posts</h2>
-                        <ul>
-                            <li><a href="">Laptop Acer Nitro 5 Gaming AN515 57 727J i7 11800H/8GB/512GB/4GB</a></li>
-                            
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="product-content-right">
-                       
-
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="product-images">
-                                    <div class="product-main-img">
-                                        <img src="assets/img/laptop.jpg" alt="">
-                                    </div>
-
-                                    <div class="product-gallery">
-                                        <img src="assets/img/acer-nitro-gaming-an515-57-727j-i7-nhqd9sv005-1-org.jpg" alt="">
-                                        <img src="assets/img/acer-nitro-gaming-an515-57-727j-i7-nhqd9sv005-5-org.jpg" alt="">
-                                        <img src="assets/img/acer-nitro-gaming-an515-57-727j-i7-nhqd9sv005-6-org.jpg" alt="">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="product-inner">
-                                    <h2 class="product-name">Laptop Acer Nitro 5 Gaming AN515 57 727J i7 11800H/8GB/512GB/4GB</h2>
-                                    <div class="product-inner-price">
-                                        <ins>28.190.000</ins> <del>29.990.000</del>
-                                    </div>
-
-                                    <form action="" class="cart">
-                                        <div class="quantity">
-                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                        </div>
-                                        <button class="add_to_cart_button" type="submit">Add to cart</button>
-                                    </form>
-
-                                    
-
-                                    <div role="tabpanel">
-                                        <ul class="product-tab" role="tablist">
-                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                                <h2>Product Description</h2>
-                                                <p>Acer Nitro 5 Gaming AN515 57 727J i7 possesses a unique, outstanding appearance and is integrated with an advanced 11th generation Intel processor, NVIDIA GeForce RTX discrete graphics card, promising. provide great user experiences.</p>
-
-                                                
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="profile">
-                                                <h2>Reviews</h2>
-                                                <div class="submit-review">
-                                                    <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                    <p><label for="email">Email</label> <input name="email" type="email"></p>
-                                                    <div class="rating-chooser">
-                                                        <p>Your rating</p>
-
-                                                        <div class="rating-wrap-post">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                    <p><input type="submit" value="Submit"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+            <div class="col-md-8">
+                <div class="product-content-right">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="product-images">
+                                <div class="product-main-img">
+                                    <img src="${detail.image}" alt="${detail.name}">
                                 </div>
                             </div>
                         </div>
 
-
-                        <div class="related-products-wrapper">
-                            <h2 class="related-products-title">Related Products</h2>
-                            <div class="related-products-carousel">
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="assets/img/product-1.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Oppo a74-128gb</a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins>5.999.000 đ</ins> <del>6.649.000 đ</del>
-                                    </div>
+                        <div class="col-sm-6">
+                            <div class="product-inner">
+                                <h2 class="product-name">${detail.name}</h2>
+                                <div class="product-inner-price">
+                                    <ins><fmt:formatNumber value="${detail.price}" type="number"/> đ</ins>
                                 </div>
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="assets/img/product-2.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+
+                                <form action="add-to-cart" method="get" class="cart">
+                                    <input type="hidden" name="pid" value="${detail.id}">
+                                    <div class="quantity">
+                                        <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                    </div>
+                                    <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
+                                </form>
+
+                                <div role="tabpanel" style="margin-top: 30px;">
+                                    <ul class="product-tab" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Mô tả sản phẩm</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                            <h2>Mô tả</h2>
+                                            <p>${detail.description}</p>
                                         </div>
-                                    </div>
-
-                                    <h2><a href="">Iphone 13 promax-128gb</a></h2>
-                                    <div class="product-carousel-price">
-                                        <ins>30.990.000 đ</ins> <del>33.999.000 đ</del>
-                                    </div>
-                                </div>
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="assets/img/product-3.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Samsung Galaxy Z Fold3 5G-512GB</a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins>39.999.999 đ</ins> <del>43.990.000 đ</del>
-                                    </div>
-                                </div>
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="assets/img/product-4.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Samsung Galaxy Z Flip5G-128gb</a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins>20.900.000 đ</ins> <del>24.980.000 đ</del>
-                                    </div>
-                                </div>
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="assets/img/product-5.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Vivo V20-128gb</a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins>4.999.990 đ</ins> <del>6.700.000 đ</del>
-                                    </div>
-                                </div>
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="assets/img/product-6.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Xiaomi Mi 11 5G</a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins>17.220.000 đ</ins> <del>19.980.000 đ</del>
                                     </div>
                                 </div>
                             </div>
@@ -336,79 +148,13 @@
             </div>
         </div>
     </div>
+</div>
 
-
-    <div class="footer-top-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-about-us">
-                        <h2>Colami</h2>
-
-                        <div class="footer-social">
-                            <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
-                            <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
-                            <a href="#" target="_blank"><i class="fa fa-youtube"></i></a>
-                            <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-menu">
-                        <h2 class="footer-wid-title">User Navigation </h2>
-                        <ul>
-                            <li><a href="">My account</a></li>
-                            <li><a href="">Order history</a></li>
-                            <li><a href="">Wishlist</a></li>
-                            <li><a href="">Vendor contact</a></li>
-                            <li><a href="">Front page</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-menu">
-                        <h2 class="footer-wid-title">Categories</h2>
-                        <ul>
-                            <li><a href="#">Mobile Phone</a></li>                          
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Laptop</a></li>                           
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-newsletter">
-                        <h2 class="footer-wid-title">Newsletter</h2>
-                        <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
-                        <div class="newsletter-form">
-                            <input type="email" placeholder="Type your email">
-                            <input type="submit" value="Subscribe">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Latest jQuery form server -->
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-
-    <!-- Bootstrap JS form CDN -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <!-- jQuery sticky menu -->
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/jquery.sticky.js"></script>
-
-    <!-- jQuery easing -->
-    <script src="assets/js/jquery.easing.1.3.min.js"></script>
-
-    <!-- Main Script -->
-    <script src="assets/js/main.js"></script>
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/jquery.easing.1.3.min.js"></script>
+<script src="js/main.js"></script>
 </body>
-
 </html>

@@ -1,43 +1,71 @@
 package com.colami.ltw2025.entity;
 
 public class Account {
-    private int id;
+    private int uID;    // Khớp với tên cột [uID] trong SQL bợn đã gửi
     private String user;
     private String pass;
-    private int isSell;  // 1: Người bán, 0: Người mua
-    private int isAdmin; // 1: Admin, 0: User thường
+    private int isSell;
+    private int isAdmin;
 
-    // 1. Constructor rỗng
     public Account() {
     }
 
-    // 2. Constructor đầy đủ (Khớp 100% với thứ tự cột trong SQL)
-    public Account(int id, String user, String pass, int isSell, int isAdmin) {
-        this.id = id;
+    public Account(int uID, String user, String pass, int isSell, int isAdmin) {
+        this.uID = uID;
         this.user = user;
         this.pass = pass;
         this.isSell = isSell;
         this.isAdmin = isAdmin;
     }
 
-    // --- Getter & Setter ---
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    // Getter và Setter
+    public int getuID() {
+        return uID;
+    }
 
-    public String getUser() { return user; }
-    public void setUser(String user) { this.user = user; }
+    public void setuID(int uID) {
+        this.uID = uID;
+    }
 
-    public String getPass() { return pass; }
-    public void setPass(String pass) { this.pass = pass; }
+    public String getUser() {
+        return user;
+    }
 
-    public int getIsSell() { return isSell; }
-    public void setIsSell(int isSell) { this.isSell = isSell; }
+    public void setUser(String user) {
+        this.user = user;
+    }
 
-    public int getIsAdmin() { return isAdmin; }
-    public void setIsAdmin(int isAdmin) { this.isAdmin = isAdmin; }
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public int getIsSell() {
+        return isSell;
+    }
+
+    public void setIsSell(int isSell) {
+        this.isSell = isSell;
+    }
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 
     @Override
     public String toString() {
-        return "Account{" + "user=" + user + ", isAdmin=" + isAdmin + '}';
+        return "Account{" +
+                "uID=" + uID +
+                ", user='" + user + '\'' +
+                ", isSell=" + isSell +
+                ", isAdmin=" + isAdmin +
+                '}';
     }
 }

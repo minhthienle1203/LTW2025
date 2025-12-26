@@ -14,39 +14,70 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "CartControl", urlPatterns = {"/add-to-cart"})
+@WebServlet(name = "CartControl", urlPatterns = {"/cart-process"})
 public class CartControl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String id = request.getParameter("pid");
-        ProductDAO dao = new ProductDAO();
-        Product p = dao.getProductByID(id); // Lấy sản phẩm từ DB
-
+        String action = request.getParameter("action");
         HttpSession session = request.getSession();
         List<Item> cart = (List<Item>) session.getAttribute("cart");
+        if (cart == null) cart = new ArrayList<>();
 
-        if (cart == null) {
-            // Nếu chưa có giỏ hàng -> Tạo mới
-            cart = new ArrayList<>();
-            cart.add(new Item(p, 1, p.getPrice()));
-        } else {
-            // Nếu có rồi -> Kiểm tra sản phẩm đã tồn tại chưa
+        ProductDAO dao = new ProductDAO();
+
+        // --- HÀNH ĐỘNG: THÊM SẢN PHẨM (ADD) ---
+        if (action == null || action.equals("add")) {
+            String id = request.getParameter("pid");
+            Product p = dao.getProductByID(id);
             boolean isExist = false;
             for (Item item : cart) {
                 if (item.getProduct().getId() == p.getId()) {
-                    item.setQuantity(item.getQuantity() + 1); // Tăng số lượng
+                    item.setQuantity(item.getQuantity() + 1);
                     isExist = true;
                     break;
                 }
             }
-            if (!isExist) {
-                cart.add(new Item(p, 1, p.getPrice())); // Thêm sản phẩm mới vào list
+            if (!isExist) cart.add(new Item(p, 1, p.getPrice()));
+
+            updateTotal(session, cart);
+            response.sendRedirect("shop");
+            return;
+        }
+
+        // --- HÀNH ĐỘNG: CẬP NHẬT SỐ LƯỢNG (UPDATE) ---
+        if (action.equals("update")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            int num = Integer.parseInt(request.getParameter("num"));
+            for (Item item : cart) {
+                if (item.getProduct().getId() == id) {
+                    if (num <= 0) {
+                        cart.remove(item);
+                    } else {
+                        item.setQuantity(num);
+                    }
+                    break;
+                }
             }
         }
 
+        // --- HÀNH ĐỘNG: XÓA SẢN PHẨM (DELETE) ---
+        if (action.equals("delete")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            cart.removeIf(item -> item.getProduct().getId() == id);
+        }
+
+        updateTotal(session, cart);
+        response.sendRedirect("cart.jsp");
+    }
+
+    // Hàm phụ tính lại tổng tiền
+    private void updateTotal(HttpSession session, List<Item> cart) {
+        double total = 0;
+        for (Item i : cart) {
+            total += i.getQuantity() * i.getPrice();
+        }
         session.setAttribute("cart", cart);
-        // Quay lại trang shop hoặc trang giỏ hàng
-        response.sendRedirect("shop");
+        session.setAttribute("totalMoney", total);
     }
 }
