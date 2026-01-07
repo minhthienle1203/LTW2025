@@ -73,7 +73,7 @@
             </div>
 
             <p style="text-align:right;">
-                <span>Not a member? </span><a class="link" href="register.html">Sign up</a>
+                <span>Not a member? </span><a class="link" href="register.jsp">Sign up</a>
             </p>
         </form>
     </div>
