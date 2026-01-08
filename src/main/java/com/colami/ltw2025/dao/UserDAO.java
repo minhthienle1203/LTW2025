@@ -89,5 +89,39 @@ public class UserDAO {
 
         return ketQua;
     }
+    // Thêm vào UserDAO.java
+    public boolean checkUserForReset(String username) {
+        // Chỉ chọn tài khoản có user trùng khớp VÀ isAdmin = 0
+        String query = "SELECT * FROM Account WHERE [user] = ? AND isAdmin = 0";
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setString(1, username);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                // Nếu có kết quả trả về -> Là User thường và Tồn tại
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public void updatePassword(String username, String newPass) {
+        String query = "UPDATE Account SET pass = ? WHERE [user] = ?";
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setString(1, newPass);
+            ps.setString(2, username);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

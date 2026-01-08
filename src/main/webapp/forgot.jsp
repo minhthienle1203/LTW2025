@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Đăng nhập - Colami shop</title>
+    <title>Quên mật khẩu - Colami shop</title>
 
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
@@ -37,7 +38,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="home">Home</a></li>
                     <li><a href="shop.jsp">Shop page</a></li>
-                    <li class="active"><a href="login">Log in</a></li>
+                    <li><a href="login">Log in</a></li>
                 </ul>
             </div>
         </div>
@@ -46,39 +47,31 @@
 
 <div class="box">
     <div class="inner-box">
-        <form action="login" method="post">
-            <h2>Log in</h2>
+        <form action="forgot" method="post">
+            <h2>Recovery</h2>
 
+            <%-- Thông báo lỗi (Màu đỏ) --%>
             <p style="color: red; text-align: center;">${mess}</p>
 
-            <input style="font-size: 17px;" type="text" name="user" placeholder="User name" required/>
+            <%-- Thông báo thành công (Màu xanh - khi đã gửi mail) --%>
+            <p style="color: green; text-align: center;">${success}</p>
 
-            <input style="font-size: 17px;" type="password" name="pass" placeholder="Password" required/>
+            <%-- Input Tên đăng nhập --%>
+            <input style="font-size: 17px;" type="text" name="username" placeholder="User name" required/>
 
-            <p>
-                <input type="checkbox" name="remember" /><span> Keep me Signed in</span>
-                <span class="forgot"><a href="forgot.jsp">Forgot password?</a></span>
-            </p>
+            <%-- Input Email (Thay cho Password) --%>
+            <input style="font-size: 17px;" type="email" name="email" placeholder="Your Email Address" required/>
 
-            <input type="submit" value="Log in" />
+            <%-- Nút Submit --%>
+            <input type="submit" value="Get Password" />
 
-            <p style="text-align:center;">
-                <span>Or Sign in with</span>
-            </p>
-
-            <div class="flex-c-m">
-                <a href="#" class="login100-social-item bg1"><i class="fa fa-facebook"></i></a>
-                <a href="#" class="login100-social-item bg2"><i class="fa fa-twitter"></i></a>
-                <a href="#" class="login100-social-item bg3"><i class="fa fa-google"></i></a>
-            </div>
-
-            <p style="text-align:right;">
-                <span>Not a member? </span><a class="link" href="register.jsp">Sign up</a>
+            <%-- Link quay lại Login --%>
+            <p style="text-align:right; margin-top: 20px;">
+                <span>Remember password? </span><a class="link" href="login.jsp">Log in now</a>
             </p>
         </form>
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="assets/js/owl.carousel.min.js"></script>
