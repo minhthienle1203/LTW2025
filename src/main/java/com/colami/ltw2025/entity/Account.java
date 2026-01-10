@@ -7,7 +7,11 @@ public class Account {
     private int isSell;
     private int isAdmin;
 
-    public Account() {
+    public Account(String user, String pass, int isSell, int isAdmin) {
+        this.user = user;
+        this.pass = pass;
+        this.isSell = isSell;
+        this.isAdmin = isAdmin;
     }
 
     public Account(int uID, String user, String pass, int isSell, int isAdmin) {

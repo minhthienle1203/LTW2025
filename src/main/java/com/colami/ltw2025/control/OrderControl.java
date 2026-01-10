@@ -51,10 +51,34 @@ public class OrderControl extends HttpServlet {
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
+        String emailReceive = request.getParameter("email");
 
         ProductDAO dao = new ProductDAO();
         dao.insertOrder(acc, cart, name, address, phone, total);
 
+        //Gửi mail xác nhận đơn
+        if (emailReceive != null && !emailReceive.trim().isEmpty()) {
+            // nội dung email (HTML)
+            String subject = "Xác nhận đơn hàng từ Colami Shop";
+            StringBuilder content = new StringBuilder();
+
+            content.append("<h3>Cảm ơn bạn đã đặt hàng tại Colami Shop!</h3>");
+            content.append("<p>Xin chào <b>").append(name).append("</b>,</p>");
+            content.append("<p>Đơn hàng của bạn đang được chúng tôi xử lý.</p>");
+            content.append("<br>");
+            content.append("<h4>Thông tin giao hàng:</h4>");
+            content.append("<ul>");
+            content.append("<li><b>Địa chỉ:</b> ").append(address).append("</li>");
+            content.append("<li><b>Số điện thoại:</b> ").append(phone).append("</li>");
+            content.append("<li><b>Tổng thanh toán:</b> ").append(String.format("%,.0f", total)).append(" VNĐ</li>");
+            content.append("</ul>");
+            content.append("<p>Cảm ơn bạn đã tin tưởng mua sắm!</p>");
+
+            // Gửi email (Chạy luồng riêng để không làm user phải chờ lâu)
+            new Thread(() -> {
+                EmailUtil.sendEmail(emailReceive, subject, content.toString());
+            }).start();
+        }
         session.removeAttribute("cart");
         session.setAttribute("totalMoney", 0);
 

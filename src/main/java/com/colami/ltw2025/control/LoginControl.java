@@ -21,6 +21,10 @@ public class LoginControl extends HttpServlet {
         String u = request.getParameter("user");
         String p = request.getParameter("pass");
 
+        if (p != null) {
+            p = DataEncryptionControl.toSHA1(p);
+        } //decode matkhau
+
         UserDAO dao = new UserDAO();
         Account a = dao.login(u, p);
 
@@ -32,6 +36,8 @@ public class LoginControl extends HttpServlet {
             // Đăng nhập thành công -> Lưu vào Session
             HttpSession session = request.getSession();
             session.setAttribute("acc", a);
+            // Thiết lập thời gian tồn tại của session
+            session.setMaxInactiveInterval(1800);
 
             // --- PHÂN QUYỀN Ở ĐÂY ---
             if (a.getIsAdmin() == 1) {
