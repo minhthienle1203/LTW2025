@@ -50,19 +50,14 @@
         <form action="forgot" method="post">
             <h2>Recovery</h2>
 
-            <%-- Thông báo lỗi (Màu đỏ) --%>
+            <%-- Thông báo lỗi --%>
             <p style="color: red; text-align: center;">${mess}</p>
 
-            <%-- Thông báo thành công (Màu xanh - khi đã gửi mail) --%>
+            <%-- Thông báo thành công--%>
             <p style="color: green; text-align: center;">${success}</p>
 
-            <%-- Input Tên đăng nhập --%>
             <input style="font-size: 17px;" type="text" name="username" placeholder="User name" required/>
-
-            <%-- Input Email (Thay cho Password) --%>
             <input style="font-size: 17px;" type="email" name="email" placeholder="Your Email Address" required/>
-
-            <%-- Nút Submit --%>
             <input type="submit" value="Get Password" />
 
             <%-- Link quay lại Login --%>

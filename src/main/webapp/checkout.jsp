@@ -82,6 +82,10 @@
                                             <label>Số điện thoại <abbr title="required" class="required">*</abbr></label>
                                             <input type="text" name="phone" placeholder="Nhập số điện thoại liên lạc" class="input-text" required>
                                         </p>
+                                        <p class="form-row form-row-wide validate-required">
+                                            <label>Địa chỉ Email <abbr title="required" class="required">*</abbr></label>
+                                            <input type="email" name="email" placeholder="Nhập Email nhận thông báo" class="input-text" required>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
