@@ -95,6 +95,53 @@
     </div>
 </div>
 
+<div id="addEmployeeModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="add" method="post">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm Sản Phẩm Mới</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Tên sản phẩm</label>
+                        <input name="name" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Hình ảnh (URL)</label>
+                        <input name="image" type="text" class="form-control" required>
+                        <small class="form-text text-muted">Bạn có thể dùng link ảnh từ dummyimage.com</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Giá tiền</label>
+                        <input name="price" type="number" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tiêu đề (Title)</label>
+                        <textarea name="title" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả (Description)</label>
+                        <textarea name="description" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Danh mục (Category ID)</label>
+                        <select name="category" class="form-select" aria-label="Default select example">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Hủy">
+                    <input type="submit" class="btn btn-success" value="Thêm">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
